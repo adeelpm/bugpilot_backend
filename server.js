@@ -10,6 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api',routes);
+app.use('/',(req,res)=>{res.send('Welcome to bugpilot')})
 
 
 app.listen(port, () => {
