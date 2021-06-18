@@ -14,8 +14,8 @@
 
 // });
 
-import {DATABASE_URL} from './env'
-// const {DATABASE_URL}=require('env.js')
+// import {DATABASE_URL} from './env'
+const {DATABASE_URL}=require('./env')
 const { Client } = require('pg');
 
 console.log("object",DATABASE_URL)
