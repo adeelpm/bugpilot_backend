@@ -2,12 +2,12 @@ const con = require('../dbconn');
 
 
 module.exports.getProject=(req,resp)=>{
-
-    console.log('getting project')
+   console.log('getting project')
+    // console.log(req)
   let uid=req.params.uid;
   con.query(`SELECT * FROM project where id in(SELECT project_id FROM user_project where user_id='${uid}')`,(err,res)=>{
       if (err) console.log(err)
-      // console.log(res)
+     
       resp.json(res)
 
   })
@@ -70,10 +70,33 @@ module.exports.createProject=(req,resp)=>{
 
 }
 
-module.exports.getAllUsers=(req,resp)=>{
+module.exports.getProjectMembers=(req,resp)=>{
   uname=req.params.uname;
+  console.log(uname)
   con.query(`SELECT id,username from user where username LIKE '%${uname}%'`,(err,res)=>{
     err?console.log("getllUserserror",err):resp.json(res)
   })
 
+}
+
+module.exports.deleteProject=(req,resp)=>{
+  pid=req.params.pid;
+  con.query(`Delete FROM project WHERE id=${pid}`,(err,res)=>{
+    if(err)return console.log(err)
+    else(
+      resp.json(res)
+    )
+  })
+
+
+}
+
+module.exports.updateProject=(req,resp)=>{
+  pid=req.params.pid
+  con.query(`UPDATE project SET name="${req.body.pname}",description="${req.body.pdescription}" WHERE id="${pid}"`,(err,res)=>{
+    if(err)return console.log(err)
+    else(
+      resp.json(res)
+    ) 
+  })
 }

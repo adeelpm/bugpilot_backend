@@ -4,13 +4,13 @@ var jwt = require('jsonwebtoken');
 // var expressJwt = require('express-jwt');
 
 module.exports.signUp=(req,resp)=>{
-    const{username,email,role_id,password,company_id}=req.body;
+    const{username,email,password,company_id}=req.body;
 
     // console.log("req body",req.body)
     let hashedpwd='';
     bcrypt.hash(password, 10, function(err, hash) {
         hashedpwd=hash;
-        con.query(`INSERT into user(username,password,email,role_id,company_id) VALUES("${username}",'${hashedpwd}','${email}','${role_id}','${company_id}')`,(err,res)=>{
+        con.query(`INSERT into user(username,password,email,company_id) VALUES("${username}",'${hashedpwd}','${email}','${company_id}')`,(err,res)=>{
             if(err) {
            return resp.json({
                 error_code:err.errno,
