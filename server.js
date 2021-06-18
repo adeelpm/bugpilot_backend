@@ -6,7 +6,12 @@ const routes=require('./routes')
 const app = express();//this is server
 const port = process.env.PORT || 5000;
 
-app.use(cors());
+var corsOptions = {
+    origin: ['http://localhost:3000', 'https://bugpilot-frontend.herokuapp.com'],
+    credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use('/api',routes);
