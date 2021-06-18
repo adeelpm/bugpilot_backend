@@ -10,7 +10,7 @@ module.exports.signUp=(req,resp)=>{
     let hashedpwd='';
     bcrypt.hash(password, 10, function(err, hash) {
         hashedpwd=hash;
-        con.query(`INSERT into user(username,password,email,company_id) VALUES("${username}",'${hashedpwd}','${email}','${company_id}')`,(err,res)=>{
+        con.query(`INSERT into public."user"(username,password,email,company_id) VALUES("${username}",'${hashedpwd}','${email}','${company_id}')`,(err,res)=>{
             if(err) {
            return resp.json({
                 error_code:err.errno,
@@ -26,7 +26,7 @@ module.exports.signUp=(req,resp)=>{
 
 module.exports.removeUser=(req,resp)=>{
     let id =req.params.id;
-    con.query(`DELETE from user WHERE id='${id}'`,(err,res)=>{
+    con.query(`DELETE from public."user" WHERE id='${id}'`,(err,res)=>{
             if(err)  resp.json(err);
             // console.log(res)
             else resp.json(res)
@@ -37,7 +37,7 @@ module.exports.signIn=(req,resp)=>{
 
     const{username,password}=req.body
     console.log("user pass",username,password)
-    con.query(`Select * FROM user WHERE username="${username}"`,(err,res)=>{
+    con.query(`Select * FROM public."user" WHERE username="${username}"`,(err,res)=>{
         if(err) resp.send(err)
 
         if(res.length == 0){
