@@ -14,12 +14,13 @@
 
 // });
 
-
+import {DATABASE_URL} from './env'
+// const {DATABASE_URL}=require('env.js')
 const { Client } = require('pg');
 
-console.log("object",process.env.DATABASE_URL)
+console.log("object",DATABASE_URL)
 const con = new Client({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
   }
