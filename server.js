@@ -9,6 +9,7 @@ const port = process.env.PORT || 5000;
 var corsOptions = {
     origin: ['http://localhost:3000', 'https://bugpilot-frontend.herokuapp.com'],
     credentials: true,
+    preflightContinue: true,
 };
 
 app.use(cors(corsOptions));
