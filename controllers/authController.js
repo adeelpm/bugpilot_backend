@@ -38,19 +38,20 @@ module.exports.signIn=(req,resp)=>{
     const{username,password}=req.body
     console.log(username,password)
     con.query(`Select * FROM user WHERE username="${username}"`,(err,res)=>{
-        if(err) throw err
-        // console.log(res)
+        if(err) resp.send(er)
+
         if(res.length == 0){
             resp.json({
                 "status":false,
-                "message":"User Not Found"
+                "message":"User Not Found",
+                "res":res
             })
         }
         else
          { 
             //   console.log("signIn res",res)
             bcrypt.compare(password,res[0].password,(err,valid)=>{
-                if(err) throw err
+                if(err) resp.send(err)
                 if(valid){
                     let token=jwt.sign({id:res[0].id},"thisissecrect")
                     delete res[0].password
