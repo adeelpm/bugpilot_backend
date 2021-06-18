@@ -37,7 +37,8 @@ module.exports.signIn=(req,resp)=>{
 
     const{username,password}=req.body
     console.log("user pass",username,password)
-    con.query(`Select * FROM public."user" WHERE username="${username}"`,(err,res)=>{
+    console.log(`Select * FROM public."user" WHERE username='${username}'`)
+    con.query(`Select * FROM public."user" WHERE username='${username}'`,(err,res)=>{
         if(err) console.log(err),resp.send(err)
 
         if(res.length == 0){
