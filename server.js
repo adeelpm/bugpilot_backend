@@ -15,6 +15,7 @@ const port = process.env.PORT || 5000;
 const allowedOrigins = ["http://localhost:3000", "https://bugpilot-frontend.herokuapp.com"];
 app.use(function(req, res, next) {
   let origin = req.headers.origin;
+  console.log("origin",origin)
   if (allowedOrigins.includes(origin)) {
     res.header("Access-Control-Allow-Origin", origin); // restrict it to the required domain
   }
