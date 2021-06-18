@@ -36,9 +36,9 @@ module.exports.removeUser=(req,resp)=>{
 module.exports.signIn=(req,resp)=>{
 
     const{username,password}=req.body
-    console.log(username,password)
+    console.log("user pass",username,password)
     con.query(`Select * FROM user WHERE username="${username}"`,(err,res)=>{
-        if(err) resp.send(er)
+        if(err) resp.send(err)
 
         if(res.length == 0){
             resp.json({
