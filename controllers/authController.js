@@ -64,6 +64,7 @@ module.exports.signIn=(req,resp)=>{
                 else if(valid){
                     let token=jwt.sign({id:res.rows[0].id},"thisissecrect")
                     delete res.rows[0].password
+                    console.log("signin token: ",token)
                     resp.json({
                         'status':true,
                         "message":"signIn resp",
@@ -89,7 +90,7 @@ module.exports.signIn=(req,resp)=>{
 //protected route
 module.exports.isSignedIn=(req,resp,next)=>{
     var token = req.headers.authorization;
-    // console.log("issignedin",req)
+    console.log("issignedintoken: ",token)
     jwt.verify(token,"thisissecrect",(err,res)=>{
         console.log("decoded",res)
         if (err) {
