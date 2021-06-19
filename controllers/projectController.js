@@ -8,7 +8,7 @@ module.exports.getProject=(req,resp)=>{
   con.query(`SELECT * FROM project where id in(SELECT project_id FROM user_project where user_id='${uid}')`,(err,res)=>{
       if (err) console.log(err)
      
-      resp.json(res)
+      resp.json(res.rows)
 
   })
 
@@ -32,7 +32,7 @@ module.exports.getProjectBug =(req,resp)=>{
 module.exports.getMembers=(req,resp)=>{
   let pid=req.params.pid
   con.query(`Select id,username from user where id in (Select user_id from user_project where project_id='${pid}')`,(err,res)=>{
-    return err?console.log(err):resp.json(res)
+    return err?console.log(err):resp.json(res.rows)
   })
 
 }
@@ -74,7 +74,7 @@ module.exports.getProjectMembers=(req,resp)=>{
   uname=req.params.uname;
   console.log(uname)
   con.query(`SELECT id,username from user where username LIKE '%${uname}%'`,(err,res)=>{
-    err?console.log("getllUserserror",err):resp.json(res)
+    err?console.log("getllUserserror",err):resp.json(res.rows)
   })
 
 }
@@ -84,7 +84,7 @@ module.exports.deleteProject=(req,resp)=>{
   con.query(`Delete FROM project WHERE id=${pid}`,(err,res)=>{
     if(err)return console.log(err)
     else(
-      resp.json(res)
+      resp.json(res.rows)
     )
   })
 
@@ -96,7 +96,7 @@ module.exports.updateProject=(req,resp)=>{
   con.query(`UPDATE project SET name="${req.body.pname}",description="${req.body.pdescription}" WHERE id="${pid}"`,(err,res)=>{
     if(err)return console.log(err)
     else(
-      resp.json(res)
+      resp.json(res.rows)
     ) 
   })
 }
