@@ -27,6 +27,21 @@ var corsOptions = {
 //   next();
 // });
 
+console.log(process.env.NODE_ENV)
+
+// if (env === 'production') {
+//     const noop = () => {}
+//     ['assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
+//       'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
+//       'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
+//       'timeline', 'timelineEnd', 'timeStamp', 'trace', 'warn',
+//     ].forEach((method) => {
+//       window.console[method] = noop
+//     })
+//   }
+
+
+ 
 
 app.use(express.json());
 // app.options('*', cors())

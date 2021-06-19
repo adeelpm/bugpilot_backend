@@ -67,7 +67,7 @@ module.exports.updateBug=(req,resp)=>{
   if (fileurl==null){fileurl='NULL'}
   con.query(`UPDATE bug SET title='${title}',description='${description}',assigned_to='${assigned_to}' ,attachments='${fileurl}',closed_on=CURRENT_TIMESTAMP WHERE id='${bid}'`,(err,res)=>{
     // console.log(`UPDATE bug SET status='${status}',closed_on=current_timestamp() WHERE id='${uid}'`)
-    if(err) console.log(err)
+    if(err) console.error(err)
     console.log("gdfg",res)
     resp.json({
       data:res,
