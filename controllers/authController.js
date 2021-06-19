@@ -4,8 +4,9 @@ var jwt = require('jsonwebtoken');
 // var expressJwt = require('express-jwt');
 
 module.exports.signUp=(req,resp)=>{
-    const {username,email,password,company_id}=req.body;
-    company_id=='undefined'?company_id=0:company_id
+    const {username,email,password}=req.body;
+    var {company_id}=req.body
+    company_id==undefined?company_id=0:company_id
 
     console.log("req body",req.body)
     let hashedpwd='';
@@ -17,12 +18,12 @@ module.exports.signUp=(req,resp)=>{
                 console.log(err)
            return resp.json({
                 error_code:err.code,
-                error_message:err.sqlMessage
+                error_message:err
             })
         }
             else  {
-                resp.json(res)
-                // console.log(res)
+                console.log("response",res)
+                return resp.json(res)
             }
 
              
@@ -43,15 +44,15 @@ module.exports.signIn=(req,resp)=>{
 
     const{username,password}=req.body
     console.log("user pass",username,password)
-    console.log("query",`Select * FROM public."user" WHERE username='${username}'`)
+    console.log("query :",`Select * FROM public."user" WHERE username='${username}'`)
     con.query(`Select * FROM public."user" WHERE username='${username}'`,(err,res)=>{
         if(err) console.log(err),resp.send(err)
-
-        if(res.length == 0){
+        // console.log("res",res)
+        if(res.rowCount== 0){
             resp.json({
                 "status":false,
                 "message":"User Not Found",
-                "res":res
+                "res":""
             })
         }
         else

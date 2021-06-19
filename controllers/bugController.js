@@ -1,18 +1,17 @@
 const con = require('../dbconn');
 
-module.exports.
-getBug =(req,resp)=>{
+module.exports.getBug =(req,resp)=>{
   console.log('getting list of project bug')
     
   let uid=req.params.uid;
   let pid=req.params.pid;
   // console.log("uid",pid);
-  con.query(`Select * from bug where project_id=${pid}`, (err, res) => {
+  con.query(`Select * from bug where project_id='${pid}'`, (err, res) => {
     if (err) {
       console.log(err);
     } else {
-      // console.log("getBug qrres",res)
-      resp.send(res);
+      console.log("getBug qrres",res.rows)
+      resp.send(res.rows);
     }
   })
 
@@ -37,7 +36,7 @@ module.exports.createBug=(req,resp)=>{
   console.log("assigned to ",assigned_to)
   console.log("assigned by",assigned_by)
   console.log("create fileurl",fileurl)
-  con.query(`INSERT INTO bug(title,description,status,assigned_to,assigned_by,project_id,attachments) VALUES("${title}","${description}","Open","${assigned_to}","${assigned_by}","${project_id}","${fileurl}")`,(err,res)=>{
+  con.query(`INSERT INTO bug(title,description,status,assigned_to,assigned_by,project_id,attachments) VALUES('${title}','${description}','Open','${assigned_to}','${assigned_by}','${project_id}','${fileurl}')`,(err,res)=>{
       if(err) console.log(err) 
       // console.log(res)
      return resp.json(res)
@@ -48,7 +47,7 @@ module.exports.createBug=(req,resp)=>{
 module.exports.changeBugStatus=(req,resp)=>{
   let bid=req.params.bid;
   const {status}=req.body;
-  con.query(`UPDATE bug SET status='${status}',closed_on=current_timestamp() WHERE id='${bid}'`,(err,res)=>{
+  con.query(`UPDATE bug SET status='${status}',closed_on=CURRENT_TIMESTAMP() WHERE id='${bid}'`,(err,res)=>{
     // console.log(`UPDATE bug SET status='${status}',closed_on=current_timestamp() WHERE id='${uid}'`)
     if(err) console.log(err)
     console.log("gdfg",res)
@@ -66,7 +65,7 @@ module.exports.updateBug=(req,resp)=>{
   let {title,description,assigned_to,fileurl}=req.body;
   console.log(fileurl,null)
   if (fileurl==null){fileurl='NULL'}
-  con.query(`UPDATE bug SET title='${title}',description='${description}',assigned_to='${assigned_to}' ,attachments='${fileurl}',closed_on=current_timestamp() WHERE id='${bid}'`,(err,res)=>{
+  con.query(`UPDATE bug SET title='${title}',description='${description}',assigned_to='${assigned_to}' ,attachments='${fileurl}',closed_on=CURRENT_TIMESTAMP WHERE id='${bid}'`,(err,res)=>{
     // console.log(`UPDATE bug SET status='${status}',closed_on=current_timestamp() WHERE id='${uid}'`)
     if(err) console.log(err)
     console.log("gdfg",res)

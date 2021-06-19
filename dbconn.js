@@ -27,19 +27,13 @@ const con = new Client({
 });
 
 
-con.connect((err) => {
-  try {
-    if (err) throw err;
-    
-  } catch (error) {
-    console.log("caught''''''''''",error)
-    
-    
+con.connect(err => {
+  if (err) {
+    console.error('connection error', err.stack)
+  } else {
+    console.log('connected')
   }
-  
-  
-  console.log("Connected!");
-});
+})
 
 
 module.exports=con;

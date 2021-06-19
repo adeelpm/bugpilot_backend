@@ -14,13 +14,14 @@ router.put('/bug/:bid',isSignedIn,changeBugStatus)
 router.put('/bug/update/:bid',isSignedIn,updateBug)
 router.delete('/bug/delete/:bid',isSignedIn,deleteBug)
 router.post('/user/adduser',signUp)
-router.get('/user/getmembers/:pid',getMembers)
+router.get('/user/projectmembers/:pid',getProjectMembers)
 
 
 
 router.get('/project/:uid',isSignedIn,getProject)
 router.post('/project/:uid',isSignedIn,createProject)
-router.get('/project/projectmembers/:uname',isSignedIn,getProjectMembers)
+// router.get('/project/projectmembers/:uname',isSignedIn,getProjectMembers)
+router.get('/project/members/:uname',isSignedIn,getMembers)
 router.put('/project/edit/:pid',isSignedIn,updateProject)
 router.delete('/project/:pid',isSignedIn,deleteProject)
 
