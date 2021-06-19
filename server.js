@@ -27,9 +27,10 @@ var corsOptions = {
 //   next();
 // });
 
-app.use(cors(corsOptions));
+
 app.use(express.json());
 // app.options('*', cors())
+app.use(cors());
 app.use('/api',routes);
 app.use('/',(req,res)=>{res.send('Welcome to bugpilot')})
 
