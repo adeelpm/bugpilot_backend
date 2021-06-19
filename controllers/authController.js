@@ -5,6 +5,7 @@ var jwt = require('jsonwebtoken');
 
 module.exports.signUp=(req,resp)=>{
     const {username,email,password,company_id}=req.body;
+    company_id=='undefined'?company_id=0:company_id
 
     console.log("req body",req.body)
     let hashedpwd='';
