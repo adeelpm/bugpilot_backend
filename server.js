@@ -6,28 +6,28 @@ const routes=require('./routes')
 const app = express();//this is server
 const port = process.env.PORT || 5000;
 
-// var corsOptions = {
-//     origin: ['http://localhost:3000', 'https://bugpilot-frontend.herokuapp.com'],
-//     credentials: true,
-//     preflightContinue: true,
-// };
+var corsOptions = {
+    origin: ['http://localhost:3000', 'https://bugpilot-frontend.herokuapp.com'],
+    credentials: true,
+    preflightContinue: true,
+};
 
-const allowedOrigins = ["http://localhost:3000", "https://bugpilot-frontend.herokuapp.com"];
-app.use(function(req, res, next) {
-  let origin = req.headers.origin;
-  console.log("origin",origin)
-  if (allowedOrigins.includes(origin)) {
-    res.header("Access-Control-Allow-Origin", origin); // restrict it to the required domain
-  }
+// const allowedOrigins = ["http://localhost:3000", "https://bugpilot-frontend.herokuapp.com"];
+// app.use(function(req, res, next) {
+//   let origin = req.headers.origin;
+//   console.log("origin",origin)
+//   if (allowedOrigins.includes(origin)) {
+//     res.header("Access-Control-Allow-Origin", origin); // restrict it to the required domain
+//   }
 
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   next();
+// });
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 app.use(express.json());
 // app.options('*', cors())
 app.use('/api',routes);
