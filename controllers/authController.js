@@ -50,7 +50,7 @@ module.exports.signIn=(req,resp)=>{
         }
         else
          { 
-            //   console.log("signIn res",res)
+            console.log("signIn res",res)
             bcrypt.compare(password,res[0].password,(err,valid)=>{
                 if(err) resp.send(err)
                 if(valid){
