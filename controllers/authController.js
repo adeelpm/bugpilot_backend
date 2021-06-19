@@ -66,7 +66,7 @@ module.exports.signIn=(req,resp)=>{
                     resp.json({
                         'status':true,
                         "message":"signIn resp",
-                        "qrdata":res.rows[0],
+                        "qrdata":res.rows,
                         "token":token,
                         "error":""
                     })   
